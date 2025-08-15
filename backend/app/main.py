@@ -1,20 +1,14 @@
 from fastapi import FastAPI
-from pydantic import BaseSettings
+from .models import Base, engine
+from .auth import router as auth_router
+from .users import role_router, user_router
 
-
-class Settings(BaseSettings):
-    """Application settings loaded from the environment."""
-
-    database_url: str
-    secret_key: str
-
-    class Config:
-        env_file = ".env"
-
-
-settings = Settings()
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.include_router(auth_router)
+app.include_router(user_router)
+app.include_router(role_router)
 
 
 @app.get("/health")
