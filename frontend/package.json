@@ -1,0 +1,10 @@
+{
+  "name": "metamorphosis-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo 'build step not configured'",
+    "test": "echo 'no tests'"
+  }
+}
