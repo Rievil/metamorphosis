@@ -59,3 +59,33 @@ class PlayerProfile(Base):
     bio = Column(String)
 
     user = relationship("User", back_populates="profile")
+
+
+class WorldEnvironment(Base):
+    __tablename__ = "world_environments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    climate = Column(String)
+    description = Column(String)
+
+
+class Archetype(Base):
+    __tablename__ = "archetypes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    description = Column(String)
+
+    skills = relationship("Skill", back_populates="archetype")
+
+
+class Skill(Base):
+    __tablename__ = "skills"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    description = Column(String)
+    archetype_id = Column(Integer, ForeignKey("archetypes.id"))
+
+    archetype = relationship("Archetype", back_populates="skills")
